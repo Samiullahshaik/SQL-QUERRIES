@@ -1,0 +1,2 @@
+SELECT City, length(City) AS CL FROM Station ORDER BY CL ASC, City LIMIT 1;
+SELECT City, length(City) AS CL FROM Station ORDER BY CL DESC, City LIMIT 1;
