@@ -1,0 +1,2 @@
+select cc, founder, num_lead, num_sr, num_man, num_emp from ( select company_code as cc, count(distinct(lead_manager_code)) as num_lead,
+count(distinct(senior_manager_code)) as num_sr, count(distinct(manager_code)) as num_man, count(distinct(employee_code)) as num_emp from employee group by company_code) as employee join company on employee.cc = company.company_code order by cc asc ;
