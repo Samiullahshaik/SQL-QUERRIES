@@ -1,0 +1,2 @@
+select city.Name from city inner join country on city.CountryCode = Country.Code where country.continent = 'Africa'
+
