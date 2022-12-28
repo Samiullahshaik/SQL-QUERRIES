@@ -1,0 +1,2 @@
+select CN.CONTINENT,floor(avg(CT.POPulation)) from CITY CT inner join COUNTRY CN on CT.COUNTRYCODE=CN.CODE group by CN.CONTINENT
+
