@@ -1,0 +1,12 @@
+SELECT hackers.hacker_id, name
+FROM hackers
+INNER JOIN submissions
+USING (hacker_id)
+INNER JOIN challenges
+USING (challenge_id)
+INNER JOIN difficulty
+USING (difficulty_level)
+WHERE submissions.score = difficulty.score
+GROUP BY hackers.hacker_id, name
+HAVING COUNT(hackers.hacker_id)>1 
+ORDER BY COUNT(hackers.hacker_id) DESC, hackers.hacker_id ASC;
