@@ -1,0 +1,9 @@
+select hacker_id, name, challenges_created from (
+select h.hacker_id, name, count(1) as challenges_created, 
+rank() over(order by count(1) desc) as rank_id, 
+count(count(1)) over(partition by count(1)) count_id
+from hackers h join challenges c on h.hacker_id = c.hacker_id
+group by h.hacker_id, name) a 
+where 
+count_id = 1 or rank_id = 1
+order by challenges_created desc, hacker_id;
