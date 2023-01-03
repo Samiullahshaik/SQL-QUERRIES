@@ -1,0 +1,10 @@
+with cte as (select Start_Date as d from Projects union all select End_Date as d from Projects order by d)
+
+
+select max(case when rn%2<>0 then d end) as d1, max(case when rn%2=0 then d end) as d2
+from(select d, row_number() over(order by d) as rn
+from cte
+group by d
+having count(d)<2) r
+group by floor((rn+1)/2)
+order by datediff(max(case when rn%2=0 then d end), max(case when rn%2<>0 then d end)), d1
