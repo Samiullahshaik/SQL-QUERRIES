@@ -1,0 +1,6 @@
+select s.name from friends f 
+    join packages p1 on p1.id = f.id
+    join packages p2 on p2.id = f.friend_id 
+    join students s on s.id = f.id
+    where p1.salary < p2.salary
+    order by p2.salary
