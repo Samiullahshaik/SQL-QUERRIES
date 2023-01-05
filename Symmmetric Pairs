@@ -1,0 +1,18 @@
+WITH Numbering AS (
+
+SELECT
+    X,
+    Y,
+    ROW_NUMBER() OVER(ORDER BY X, Y) AS RN
+FROM Functions
+)
+
+SELECT DISTINCT
+    N1.X,
+    N1.Y
+FROM
+    Numbering N1 
+        JOIN
+    Numbering N2 ON N1.X = N2.Y AND N2.X = N1.Y AND N1.RN <> N2.RN
+WHERE N1.X <= N1.Y
+ORDER BY X,Y
