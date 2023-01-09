@@ -1,0 +1,15 @@
+DELIMITER $$
+CREATE PROCEDURE draw_triangle()
+BEGIN
+    DECLARE i INT default 1;
+    CREATE TEMPORARY TABLE triangle (rep TEXT);
+    WHILE i < 21 DO
+        INSERT INTO triangle (rep) VALUES(REPEAT('* ', i));
+        SET i = i+1;
+    END WHILE;
+    SELECT * FROM triangle;    
+END$$
+
+DELIMITER ;
+
+CALL draw_triangle()
