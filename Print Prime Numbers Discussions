@@ -1,0 +1,21 @@
+DELIMITER $$
+CREATE PROCEDURE calcular_primos()
+BEGIN
+    DECLARE i, j INT default 2; DECLARE raiz INT default 0;
+    DECLARE primo BOOLEAN default TRUE; CREATE TEMPORARY TABLE primos (numeros INT);
+    WHILE i <= 1000 DO
+        SET raiz = ROUND(SQRT(i));
+        SET j = 2; SET primo = TRUE;
+        WHILE j <= raiz DO
+            IF i%j = 0 THEN SET primo = FALSE; END IF;
+            SET j = j+1;
+        END WHILE;
+        IF primo THEN INSERT INTO primos (numeros) VALUES (i); END IF;
+        SET i = i+1;
+    END WHILE;
+    SELECT GROUP_CONCAT(numeros SEPARATOR '&') FROM primos;
+END$$
+
+DELIMITER ;
+
+CALL calcular_primos()
